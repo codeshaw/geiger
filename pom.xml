@@ -10,21 +10,27 @@
   <name>geiger</name>
   <description>home-automation.io integration plugin for the GQ electronics GMC 500+ Geiger counter</description>
 
-<!--  <properties>-->
-<!--    <java.version>1.8</java.version>-->
-<!--  </properties>-->
+  <properties>
+    <java.version>1.8</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <spring.boot.version>2.2.2.RELEASE</spring.boot.version>
+    <!-- Plugin versions -->
+    <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+    <spring.boot.plugin.version>2.2.4.RELEASE</spring.boot.plugin.version>
+    <docker.file.plugin.version>1.4.13</docker.file.plugin.version>
+  </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
-      <version>2.2.2.RELEASE</version>
+      <version>${spring.boot.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
-      <version>2.2.2.RELEASE</version>
+      <version>${spring.boot.version}</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -33,6 +39,7 @@
         </exclusion>
       </exclusions>
     </dependency>
+
   </dependencies>
 
   <build>
@@ -40,7 +47,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
+        <version>${maven.compiler.plugin.version}</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
@@ -50,7 +57,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>2.2.4.RELEASE</version>
+        <version>${spring.boot.plugin.version}</version>
         <executions>
           <execution>
             <goals>
