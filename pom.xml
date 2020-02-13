@@ -40,6 +40,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
@@ -57,6 +58,75 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>dockerfile-maven-plugin</artifactId>
+        <version>1.4.13</version>
+        <executions>
+          <!-- Bind dockerfile:build to mavn:package -->
+          <execution>
+            <id>build-image</id>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+
+          <!-- Tag latest -->
+          <execution>
+            <id>tag-latest</id>
+            <goals>
+              <goal>tag</goal>
+            </goals>
+            <configuration>
+              <repository>codeshaw/geiger</repository>
+              <tag>latest</tag>
+            </configuration>
+          </execution>
+
+          <!-- Tag version -->
+          <execution>
+            <id>tag-version</id>
+            <goals>
+              <goal>tag</goal>
+            </goals>
+            <configuration>
+              <repository>codeshaw/geiger</repository>
+              <tag>${project.version}</tag>
+            </configuration>
+          </execution>
+
+          <!-- Push latest -->
+          <execution>
+            <id>push-latest</id>
+            <goals>
+              <goal>push</goal>
+            </goals>
+            <phase>deploy</phase>
+            <configuration>
+              <tag>latest</tag>
+            </configuration>
+          </execution>
+
+          <!-- Push version -->
+          <execution>
+            <id>push-version</id>
+            <goals>
+              <goal>push</goal>
+            </goals>
+            <phase>deploy</phase>
+            <configuration>
+              <tag>${project.version}</tag>
+            </configuration>
+          </execution>
+        </executions>
+
+        <configuration>
+          <buildArgs>
+            <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+          </buildArgs>
+        </configuration>
       </plugin>
     </plugins>
   </build>
